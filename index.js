@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const dbConnect = require("./dbConnect");
 const authRouter = require("./routers/authRouter");
 const storiesRouter = require("./routers/storiesRouter");
-const reelsRouter = require('./routers/reelsRouter')
+const reelsRouter = require("./routers/reelsRouter");
 const morgan = require("morgan");
 const postRouter = require("./routers/postsRouter");
 const userRouter = require("./routers/userRouter");
@@ -30,10 +30,17 @@ app.use(
 );
 app.use(morgan("common"));
 app.use(cookieParser());
+
+let origin = "http://localhost:3000";
+console.log("here env = ", process.env.NODE_ENV);
+if (process.env.NODE_ENV === "production") {
+  origin = process.env.CORS_ORIGIN;
+}
+
 app.use(
   cors({
     credentials: true,
-    origin: process.env.CORS_ORIGIN,
+    origin,
   })
 );
 
