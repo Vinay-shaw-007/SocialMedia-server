@@ -9,7 +9,7 @@ const createPostController = async (req, res) => {
     const { caption, postImg } = req.body;
     const owner = req._id;
 
-    if (!caption || !postImg) {
+    if (!caption && !postImg) {
       return res.send(error(400, "Caption and Post Image are required"));
     }
 
@@ -17,7 +17,7 @@ const createPostController = async (req, res) => {
       return res.send(error(400, "Caption is required"));
     }
 
-    if (!postImg) {
+    if (!postImg || postImg.isEmpty()) {
       return res.send(error(400, "Post Image is required"));
     }
 
