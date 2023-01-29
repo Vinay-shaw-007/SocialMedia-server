@@ -55,7 +55,9 @@ const uploadStories = async (req, res) => {
       await storyAlreadyPresent.save();
     }
 
-    return res.send(success(200, `Successfully added ${stories.length} stories`));
+    return res.send(
+      success(200, `Successfully added ${stories.length} stories`)
+    );
   } catch (e) {
     return res.send(error(500, e.message));
   }
@@ -64,8 +66,6 @@ const uploadStories = async (req, res) => {
 const fetchStories = async (req, res) => {
   try {
     const { storiesId } = req.body;
-    console.log('backend stories id', storiesId);
-    console.log('backend stories body', req.body);
     if (!storiesId) {
       return res.send(error(404, "Stories Id is required"));
     }
@@ -77,7 +77,30 @@ const fetchStories = async (req, res) => {
   }
 };
 
+const deleteMyStoryController = async (req, res) => {
+  try {
+    const { storiesId } = req.body;
+    if (!storiesId) {
+      return res.send(error(404, "Stories Id is required"));
+    }
+
+    const myStory = await Stories.findById(storiesId);
+
+    const myUserId = myStory.owner;
+
+    const user = await User.findById(myUserId);
+    user.storiesId = undefined;
+    await user.save();
+    await myStory.remove();
+
+    return res.send(success(200, "Your story has been successfully removed"));
+  } catch (e) {
+    return res.send(error(500, e.message));
+  }
+};
+
 module.exports = {
   uploadStories,
   fetchStories,
+  deleteMyStoryController,
 };

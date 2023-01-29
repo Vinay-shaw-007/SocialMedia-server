@@ -98,7 +98,6 @@ const refreshAccessTokenController = async (req, res) => {
             })
         );
     } catch (e) {
-        console.log("error in refresh token ", e);
         return res.send(error(401, "Invalid refresh token."));
     }
 };
@@ -109,7 +108,6 @@ const generateAccessToken = (data) => {
         const token = jwt.sign(data, process.env.ACCESS_TOKEN_PRIVATE_KEY, {
             expiresIn: "1d",
         });
-        console.log(token);
         return token;
     } catch (e) {
         return res.send(error(500, e.message))
@@ -121,7 +119,6 @@ const generaterefreshToken = (data) => {
         const token = jwt.sign(data, process.env.REFRESH_TOKEN_PRIVATE_KEY, {
             expiresIn: "1y",
         });
-        console.log(token);
         return token;
     } catch (e) {
         return res.send(error(500, e.message))

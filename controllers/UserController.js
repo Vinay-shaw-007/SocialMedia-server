@@ -80,7 +80,6 @@ const getPostOfFollowing = async (req, res) => {
       success(200, { ...currUser._doc, suggestions, posts, followerStories })
     );
   } catch (e) {
-    console.log(e);
     return res.send(error(500, e.message));
   }
 };
@@ -94,7 +93,6 @@ const getMyPosts = async (req, res) => {
 
     return res.send(success(200, { allUserPosts }));
   } catch (e) {
-    console.log(e);
     return res.send(error(500, e.message));
   }
 };
@@ -111,7 +109,6 @@ const getUserPosts = async (req, res) => {
 
     return res.send(success(200, { allUserPosts }));
   } catch (e) {
-    console.log(e);
     return res.send(error(500, e.message));
   }
 };
@@ -164,7 +161,6 @@ const deleteMyProfile = async (req, res) => {
 
     return res.send(success(200, "user deleted"));
   } catch (error) {
-    console.log(e);
     return res.send(error(500, e.message));
   }
 };

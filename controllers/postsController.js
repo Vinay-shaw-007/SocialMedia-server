@@ -82,9 +82,6 @@ const updatePostController = async (req, res) => {
       return res.send(error(404, "Post not found"));
     }
 
-    console.log("post owner id", post.owner._id.toString());
-    console.log("current user id", currUserId);
-
     if (post.owner._id.toString() !== currUserId) {
       return res.send(error(403, "Only owner update their posts"));
     }

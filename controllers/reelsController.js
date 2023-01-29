@@ -8,9 +8,6 @@ const createReelController = async (req, res) => {
     const { caption, postReel } = req.body;
     const owner = req._id;
 
-    console.log("post reel", postReel);
-    console.log("caption", caption);
-
     if (!caption || !postReel) {
       return res.send(error(400, "Caption and Reel are required"));
     }
@@ -40,7 +37,6 @@ const createReelController = async (req, res) => {
     };
     if (!reelAlreadyPresent) {
       //if user is creating reels for the first time....
-      console.log("Create reels for the first time", userReelId);
       const reel = await Reels.create({
         owner: req._id,
         caption,
