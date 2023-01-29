@@ -17,7 +17,7 @@ const createPostController = async (req, res) => {
       return res.send(error(400, "Caption is required"));
     }
 
-    if (!postImg || postImg.isEmpty()) {
+    if (!postImg || postImg === "") {
       return res.send(error(400, "Post Image is required"));
     }
 

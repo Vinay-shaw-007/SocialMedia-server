@@ -16,7 +16,7 @@ const createReelController = async (req, res) => {
       return res.send(error(400, "Caption is required"));
     }
 
-    if (!postReel) {
+    if (!postReel || postReel === "") {
       return res.send(error(400, "Reel is required"));
     }
 
